@@ -1,0 +1,863 @@
+/* --- 1. BASIC RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #faf6f9;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+/* --- 2. DARK OVERLAY FOR MOBILE --- */
+.overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    transition: opacity 0.3s;
+}
+
+.overlay.active {
+    display: block;
+}
+
+/* --- 3. SIDEBAR STYLES --- */
+.sidebar {
+    width: 250px;
+    background: #1e293b; /* Dark slate blue */
+    color: white;
+    padding: 20px;
+    transition: width 0.3s ease, transform 0.3s ease;
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.sidebar h2 {
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+}
+
+/* --- REPLACE YOUR CURRENT SIDEBAR LINK STYLES WITH THIS --- */
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    margin-bottom: 8px; /* Slightly more breathing room between links */
+}
+
+.sidebar ul li a {
+    padding: 12px 15px; /* Perfect tap-target size for mobile screens */
+    display: flex;
+    align-items: center;
+    color: #cbd5e1; /* Softer gray text so the active white link pops more */
+    text-decoration: none;
+    gap: 15px;
+    border-radius: 6px;
+    border-left: 4px solid transparent; /* PREVENTS THE JUMP: Holds space for the blue border */
+    transition: all 0.3s ease; /* Smooth, premium fade effect */
+}
+
+.sidebar ul li:hover a,
+.sidebar ul li.active a {
+    background: #334155;
+    color: white; /* Brightens text when active/hovered */
+    border-left: 4px solid #3b82f6; /* Blue active indicator */
+}
+
+.sidebar ul li i {
+    min-width: 24px; /* Forces all icons to perfectly center, even if some are wider */
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.sidebar ul li a span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adds '...' if text ever gets too long */
+}
+
+/* Desktop Collapsed State */
+.sidebar.collapsed {
+    width: 70px;
+    padding: 20px 10px;
+}
+
+.sidebar.collapsed h2,
+.sidebar.collapsed span {
+    display: none; /* Hides text when shrunk */
+}
+
+.sidebar.collapsed ul li a {
+    justify-content: center;
+    padding: 12px 0;
+}
+
+/* --- 4. MAIN CONTENT AREA --- */
+.main {
+    flex: 1;
+    padding: 20px;
+    width: 100%;
+}
+
+/* Top Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+#toggle {
+    padding: 10px 15px;
+    border: none;
+    background: #3b82f6;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background 0.2s;
+}
+
+#toggle:hover {
+    background: #2563eb;
+}
+
+.navbar input {
+    padding: 10px;
+    width: 250px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+}
+
+.profile {
+    background: white;
+    color: #1e293b;
+    padding: 10px 12px;
+    border-radius: 50%;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+/* Stats Cards */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    transition: 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    color: #64748b;
+    font-size: 1rem;
+}
+
+.card p {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #3b82f6;
+}
+
+/* Chart Section */
+/* --- REPLACE YOUR CURRENT CHART SECTION WITH THIS --- */
+
+.chart-section {
+    margin-top: 30px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.chart-section h3 {
+    color: #1e293b;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.chart {
+    display: flex;
+    align-items: flex-end; /* This is the magic trick: anchors bars to the bottom */
+    gap: 15px; /* Spacing between the bars */
+    height: 220px; /* Gives the chart a fixed height to grow within */
+    border-bottom: 2px solid #e2e8f0; /* Creates a baseline for the graph */
+    padding-bottom: 5px; /* Keeps bars slightly above the baseline */
+}
+
+.chart div {
+    flex: 1; /* Makes all bars an equal width */
+    background: #3b82f6; /* Geypey Admin blue */
+    border-radius: 6px 6px 0 0; /* Rounds only the top corners */
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Adds a premium interactive feel when you hover over a bar */
+.chart div:hover {
+    background: #1e40af; /* Changes to a darker blue */
+    transform: scaleY(1.05); /* Makes the bar pop up slightly */
+    transform-origin: bottom; /* Ensures the pop-up happens from the top, not the middle */
+}
+/* Table Section */
+/* --- REPLACE YOUR CURRENT TABLE SECTION WITH THIS --- */
+
+.table-section {
+    margin-top: 30px;
+    background: white;
+    padding: 25px; /* Matches the padding of the other cards */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.table-section h3 {
+    color: #1e293b;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+/* 1. Styling the Headers */
+th {
+    background-color: #f8fafc; /* Very light gray to separate the header */
+    color: #64748b; /* Muted text so the actual data stands out more */
+    font-size: 0.85rem;
+    text-transform: uppercase; /* Makes it look clean and structured */
+    letter-spacing: 0.5px;
+    padding: 15px;
+    border-bottom: 2px solid #e2e8f0; /* Stronger border for the header */
+}
+
+/* 2. Styling the Data Cells */
+td {
+    padding: 15px;
+    color: #334155;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #f1f5f9; /* Subtle line between rows */
+}
+
+/* 3. The Interactive Row Hover Effect */
+table tr {
+    transition: background-color 0.2s ease;
+}
+
+table tr:hover {
+    background-color: #f8fafc; /* Highlights the row you are hovering over */
+    cursor: pointer;
+}
+
+/* --- 5. MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    /* Slide sidebar off-screen */
+    .sidebar {
+        position: fixed;
+        height: 100vh;
+        transform: translateX(-100%); 
+    }
+
+    /* Class added by JS to slide it in */
+    .sidebar.active {
+        transform: translateX(0); 
+    }
+
+    /* Prevent collapsed state from messing up mobile view */
+    .sidebar.collapsed {
+        width: 250px; 
+    }
+    .sidebar.collapsed h2,
+    .sidebar.collapsed span {
+        display: block; 
+    }
+
+    /* Shrink navbar elements to fit */
+    .navbar input {
+        width: 140px; 
+    }
+}
+
+/* --- 7. ORDERS PAGE SPECIFIC STYLES --- */
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap; /* Allows it to stack on very small screens */
+    gap: 15px;
+}
+
+.page-header h2 {
+    color: #1e293b;
+    font-size: 1.5rem;
+}
+
+.table-controls {
+    display: flex;
+    gap: 15px;
+}
+
+.table-controls input {
+    padding: 10px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    width: 250px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.table-controls input:focus {
+    border-color: #3b82f6;
+}
+
+.filter-dropdown {
+    padding: 10px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background-color: white;
+    color: #475569;
+    outline: none;
+    cursor: pointer;
+}
+
+.action-btn {
+    background: transparent;
+    border: 1px solid #cbd5e1;
+    padding: 6px 12px;
+    border-radius: 4px;
+    color: #64748b;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.action-btn:hover {
+    background: #f1f5f9;
+    color: #3b82f6;
+    border-color: #3b82f6;
+}
+
+/* Pagination Styles */
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.page-btn {
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    color: #475569;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.page-btn:hover:not(.disabled) {
+    background: #f1f5f9;
+}
+
+.page-btn.active {
+    background: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+}
+
+.page-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Mobile Adjustments for Orders Page */
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .table-controls {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .table-controls input,
+    .filter-dropdown {
+        width: 100%;
+    }
+}
+
+/* --- 8. PRODUCTS PAGE SPECIFIC STYLES --- */
+
+/* Primary Button for Adding Products */
+.add-btn {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.add-btn:hover {
+    background-color: #2563eb;
+}
+
+/* The CSS Grid Setup */
+.product-grid {
+    display: grid;
+    /* This creates responsive columns that wrap automatically! */
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+/* Individual Product Cards */
+.product-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden; /* Keeps the top image corners rounded */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Image Placeholders (Since we don't have real photos yet) */
+.product-img {
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.placeholder-blue { background: #60a5fa; }
+.placeholder-purple { background: #c084fc; }
+.placeholder-orange { background: #fb923c; }
+.placeholder-green { background: #4ade80; }
+
+/* Product Details */
+.product-info {
+    padding: 20px;
+}
+
+.product-info h3 {
+    color: #1e293b;
+    font-size: 1.1rem;
+    margin: 10px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Truncates long titles */
+}
+
+.product-info .price {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #3b82f6;
+    margin-bottom: 15px;
+}
+
+/* Stock Status Badges */
+.stock {
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.in-stock { background: #dcfce7; color: #16a34a; }
+.low-stock { background: #fef08a; color: #ca8a04; }
+.out-stock { background: #fee2e2; color: #dc2626; }
+
+/* Edit/Delete Buttons */
+.card-actions {
+    display: flex;
+    gap: 10px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 15px;
+}
+
+.card-actions button {
+    flex: 1; /* Makes the buttons split the available width evenly */
+    padding: 8px;
+    border: 1px solid #e2e8f0;
+    background: transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #64748b;
+    transition: 0.2s;
+}
+
+.edit-btn:hover { background: #f0f9ff; color: #0284c7; border-color: #0284c7; }
+.delete-btn:hover { background: #fef2f2; color: #dc2626; border-color: #dc2626; }
+
+/* --- 9. MODAL STYLES --- */
+
+/* The dark background overlay */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.6); /* Darker, slightly blue tint */
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Hidden by default with a smooth fade */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+/* This class gets added by JavaScript to reveal the modal */
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* The white pop-up box */
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    
+    /* Starts slightly lower and slides up when opened */
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+}
+
+/* Header */
+.modal-header {
+    padding: 20px 25px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    color: #1e293b;
+    font-size: 1.2rem;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #64748b;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.close-modal:hover {
+    color: #dc2626; /* Turns red on hover */
+}
+
+/* Body & Form Inputs */
+.modal-body {
+    padding: 25px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #475569;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #3b82f6; /* Blue outline when typing */
+}
+
+/* Footer & Buttons */
+.modal-footer {
+    padding: 20px 25px;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: flex-end; /* Pushes buttons to the right */
+    gap: 15px;
+}
+
+.cancel-btn {
+    padding: 10px 20px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    color: #475569;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.cancel-btn:hover {
+    background: #f1f5f9;
+}
+
+.save-btn {
+    padding: 10px 20px;
+    border: none;
+    background: #3b82f6;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.save-btn:hover {
+    background: #2563eb;
+}
+
+/* --- 10. USERS PAGE SPECIFIC STYLES --- */
+
+/* Aligning the Avatar and Name side-by-side */
+.user-profile-cell {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: bold;
+    color: #1e293b;
+}
+
+/* The Circular Avatar */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* Avatar Colors */
+.bg-blue { background-color: #3b82f6; }
+.bg-purple { background-color: #8b5cf6; }
+.bg-orange { background-color: #f97316; }
+
+/* User Role Badges (Different shape than Status badges) */
+.role {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.role.admin { background-color: #ede9fe; color: #7c3aed; }
+.role.editor { background-color: #e0f2fe; color: #0284c7; }
+.role.customer { background-color: #f1f5f9; color: #475569; }
+
+/* Danger Button Styling (for Delete icons) */
+.text-danger:hover {
+    color: #dc2626;
+    border-color: #dc2626;
+    background-color: #fef2f2;
+}
+
+/* --- 11. SETTINGS PAGE SPECIFIC STYLES --- */
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.settings-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.settings-card h3 {
+    color: #1e293b;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* Form Styles */
+.settings-form .form-group {
+    margin-bottom: 20px;
+}
+
+.settings-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: inherit; /* Keeps the font matching the rest of the site */
+    resize: vertical; /* Only allows the user to stretch the box up and down */
+}
+
+.settings-form textarea:focus {
+    border-color: #3b82f6;
+}
+
+/* Toggle Switch Layout */
+.toggle-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.toggle-wrapper:last-child {
+    border-bottom: none;
+}
+
+.toggle-text h4 {
+    color: #334155;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.toggle-text p {
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+/* The Magic Custom Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 24px;
+    flex-shrink: 0; /* Prevents the switch from squishing on small screens */
+}
+
+/* Hide the default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The sliding track */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #cbd5e1;
+    transition: 0.4s;
+    border-radius: 24px;
+}
+
+/* The white circle inside the track */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+/* When checked, change background to blue and slide the circle */
+input:checked + .slider {
+    background-color: #3b82f6;
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px);
+}

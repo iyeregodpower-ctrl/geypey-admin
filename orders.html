@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - Geypey Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="container">
+
+        <aside class="sidebar" id="sidebar">
+            <h2>Geypey Admin</h2>
+            <ul>
+                <li><a href="index.html"><i class="fa fa-chart-line"></i><span> Dashboard</span></a></li>
+                <li class="active"><a href="orders.html"><i class="fa fa-box"></i><span> Orders</span></a></li>
+                <li><a href="users.html"><i class="fa fa-users"></i><span> Users</span></a></li>
+                <li><a href="products.html"><i class="fa fa-shopping-cart"></i><span> Products</span></a></li>
+                <li><a href="settings.html"><i class="fa fa-cog"></i><span> Settings</span></a></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            
+            <div class="navbar">
+                <button id="toggle">☰</button>
+                <div class="profile">GP</div>
+            </div>
+
+            <div class="page-header">
+                <h2>Order Management</h2>
+                <div class="table-controls">
+                    <input type="text" placeholder="Search orders by ID or Name...">
+                    <select class="filter-dropdown">
+                        <option value="all">All Statuses</option>
+                        <option value="completed">Completed</option>
+                        <option value="pending">Pending</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-section">
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer Name</th>
+                                <th>Date</th>
+                                <th>Total Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#ORD-8901</td>
+                                <td>John Doe</td>
+                                <td>Oct 24, 2023</td>
+                                <td>$900.00</td>
+                                <td><span class="status completed">Completed</span></td>
+                                <td><button class="action-btn"><i class="fa fa-eye"></i> View</button></td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-8902</td>
+                                <td>Mary Smith</td>
+                                <td>Oct 24, 2023</td>
+                                <td>$500.00</td>
+                                <td><span class="status pending">Pending</span></td>
+                                <td><button class="action-btn"><i class="fa fa-eye"></i> View</button></td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-8903</td>
+                                <td>David Johnson</td>
+                                <td>Oct 23, 2023</td>
+                                <td>$1,250.00</td>
+                                <td><span class="status completed">Completed</span></td>
+                                <td><button class="action-btn"><i class="fa fa-eye"></i> View</button></td>
+                            </tr>
+                            <tr>
+                                <td>#ORD-8904</td>
+                                <td>Sarah Williams</td>
+                                <td>Oct 22, 2023</td>
+                                <td>$120.00</td>
+                                <td><span class="status cancelled">Cancelled</span></td>
+                                <td><button class="action-btn"><i class="fa fa-eye"></i> View</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination">
+                    <button class="page-btn disabled">Previous</button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">Next</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

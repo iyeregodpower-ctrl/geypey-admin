@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Geypey Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="container">
+
+        <aside class="sidebar" id="sidebar">
+            <h2>Geypey Admin</h2>
+            <ul>
+                <li><a href="index.html"><i class="fa fa-chart-line"></i><span> Dashboard</span></a></li>
+                <li><a href="orders.html"><i class="fa fa-box"></i><span> Orders</span></a></li>
+                <li><a href="users.html"><i class="fa fa-users"></i><span> Users</span></a></li>
+                <li class="active"><a href="products.html"><i class="fa fa-shopping-cart"></i><span> Products</span></a></li>
+                <li><a href="settings.html"><i class="fa fa-cog"></i><span> Settings</span></a></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            
+            <div class="navbar">
+                <button id="toggle">☰</button>
+                <div class="profile">GP</div>
+            </div>
+
+            <div class="page-header">
+                <h2>Product Inventory</h2>
+                <button class="add-btn"><i class="fa fa-plus"></i> Add New Product</button>
+            </div>
+
+            <div class="product-grid">
+                
+                <div class="product-card">
+                    <div class="product-img placeholder-blue"><i class="fa fa-laptop"></i></div>
+                    <div class="product-info">
+                        <span class="stock in-stock">In Stock (45)</span>
+                        <h3>Probook Laptop 15"</h3>
+                        <p class="price">$899.99</p>
+                        <div class="card-actions">
+                            <button class="edit-btn"><i class="fa fa-pen"></i></button>
+                            <button class="delete-btn"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img placeholder-purple"><i class="fa fa-mobile-screen"></i></div>
+                    <div class="product-info">
+                        <span class="stock low-stock">Low Stock (3)</span>
+                        <h3>Smartphone X Pro</h3>
+                        <p class="price">$599.00</p>
+                        <div class="card-actions">
+                            <button class="edit-btn"><i class="fa fa-pen"></i></button>
+                            <button class="delete-btn"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img placeholder-orange"><i class="fa fa-headphones"></i></div>
+                    <div class="product-info">
+                        <span class="stock out-stock">Out of Stock</span>
+                        <h3>Wireless Noise Cancelling Headphones</h3>
+                        <p class="price">$199.50</p>
+                        <div class="card-actions">
+                            <button class="edit-btn"><i class="fa fa-pen"></i></button>
+                            <button class="delete-btn"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-img placeholder-green"><i class="fa fa-watch"></i></div>
+                    <div class="product-info">
+                        <span class="stock in-stock">In Stock (120)</span>
+                        <h3>Smart Watch Series 5</h3>
+                        <p class="price">$249.00</p>
+                        <div class="card-actions">
+                            <button class="edit-btn"><i class="fa fa-pen"></i></button>
+                            <button class="delete-btn"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+<div class="modal" id="addProductModal">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h3>Add New Product</h3>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input type="text" placeholder="e.g. Wireless Gaming Mouse">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Price ($)</label>
+                            <input type="number" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label>Stock Quantity</label>
+                            <input type="number" placeholder="0">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Image Color Category</label>
+                        <select>
+                            <option>Blue</option>
+                            <option>Purple</option>
+                            <option>Orange</option>
+                            <option>Green</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="cancel-btn" id="cancelBtn">Cancel</button>
+                <button class="save-btn">Save Product</button>
+            </div>
+            
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>

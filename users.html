@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users - Geypey Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="container">
+
+        <aside class="sidebar" id="sidebar">
+            <h2>Geypey Admin</h2>
+            <ul>
+                <li><a href="index.html"><i class="fa fa-chart-line"></i><span> Dashboard</span></a></li>
+                <li><a href="orders.html"><i class="fa fa-box"></i><span> Orders</span></a></li>
+                <li class="active"><a href="users.html"><i class="fa fa-users"></i><span> Users</span></a></li>
+                <li><a href="products.html"><i class="fa fa-shopping-cart"></i><span> Products</span></a></li>
+                <li><a href="settings.html"><i class="fa fa-cog"></i><span> Settings</span></a></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            
+            <div class="navbar">
+                <button id="toggle">☰</button>
+                <div class="profile">GP</div>
+            </div>
+
+            <div class="page-header">
+                <h2>User Management</h2>
+                <button class="add-btn"><i class="fa fa-user-plus"></i> Add New User</button>
+            </div>
+
+            <div class="table-section">
+                <div class="table-controls" style="margin-bottom: 20px;">
+                    <input type="text" placeholder="Search users by name or email...">
+                    <select class="filter-dropdown">
+                        <option value="all">All Roles</option>
+                        <option value="admin">Admin</option>
+                        <option value="editor">Editor</option>
+                        <option value="customer">Customer</option>
+                    </select>
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Email Address</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="user-profile-cell">
+                                        <div class="avatar bg-blue">JD</div>
+                                        <span>John Doe</span>
+                                    </div>
+                                </td>
+                                <td>john.doe@example.com</td>
+                                <td><span class="role admin">Admin</span></td>
+                                <td><span class="status completed">Active</span></td>
+                                <td>
+                                    <button class="action-btn"><i class="fa fa-pen"></i></button>
+                                    <button class="action-btn text-danger"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <div class="user-profile-cell">
+                                        <div class="avatar bg-purple">MS</div>
+                                        <span>Mary Smith</span>
+                                    </div>
+                                </td>
+                                <td>mary.s@example.com</td>
+                                <td><span class="role customer">Customer</span></td>
+                                <td><span class="status completed">Active</span></td>
+                                <td>
+                                    <button class="action-btn"><i class="fa fa-pen"></i></button>
+                                    <button class="action-btn text-danger"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="user-profile-cell">
+                                        <div class="avatar bg-orange">DJ</div>
+                                        <span>David Johnson</span>
+                                    </div>
+                                </td>
+                                <td>david.j@example.com</td>
+                                <td><span class="role editor">Editor</span></td>
+                                <td><span class="status pending">Inactive</span></td>
+                                <td>
+                                    <button class="action-btn"><i class="fa fa-pen"></i></button>
+                                    <button class="action-btn text-danger"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

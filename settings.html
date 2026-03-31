@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Geypey Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="container">
+
+        <aside class="sidebar" id="sidebar">
+            <h2>Geypey Admin</h2>
+            <ul>
+                <li><a href="index.html"><i class="fa fa-chart-line"></i><span> Dashboard</span></a></li>
+                <li><a href="orders.html"><i class="fa fa-box"></i><span> Orders</span></a></li>
+                <li><a href="users.html"><i class="fa fa-users"></i><span> Users</span></a></li>
+                <li><a href="products.html"><i class="fa fa-shopping-cart"></i><span> Products</span></a></li>
+                <li class="active"><a href="settings.html"><i class="fa fa-cog"></i><span> Settings</span></a></li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            
+            <div class="navbar">
+                <button id="toggle">☰</button>
+                <div class="profile">GP</div>
+            </div>
+
+            <div class="page-header">
+                <h2>Account Settings</h2>
+                <button class="save-btn"><i class="fa fa-save"></i> Save Changes</button>
+            </div>
+
+            <div class="settings-grid">
+                
+                <div class="settings-card">
+                    <h3>Profile Information</h3>
+                    <form class="settings-form">
+                        <div class="form-group">
+                            <label>Brand / Studio Name</label>
+                            <input type="text" value="Geypey Web Studio">
+                        </div>
+                        <div class="form-group">
+                            <label>Administrator Name</label>
+                            <input type="text" value="Iyere">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" value="admin@geypey.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Short Bio</label>
+                            <textarea rows="4" placeholder="Enter a brief description of your store or studio..."></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="settings-card">
+                    <h3>System Preferences</h3>
+                    
+                    <div class="toggle-wrapper">
+                        <div class="toggle-text">
+                            <h4>Email Notifications</h4>
+                            <p>Receive an email every time a new order is placed.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-wrapper">
+                        <div class="toggle-text">
+                            <h4>Dark Mode Interface</h4>
+                            <p>Switch the dashboard to a darker color theme.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-wrapper">
+                        <div class="toggle-text">
+                            <h4>Weekly Reports</h4>
+                            <p>Get a summary of sales and user activity every Monday.</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
